@@ -1,0 +1,50 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::xxxxxxxxxxxx:role/S3ReadWrite"
+            },
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": "arn:aws:s3:::mysecengtest/*"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::xxxxxxxxxxxx:role/S3ReadOnly"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::mysecengtest/*"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::xxxxxxxxxxxx:role/S3ReadWrite",
+                    "arn:aws:iam::xxxxxxxxxxxx:role/S3ReadOnly"
+                ]
+            },
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:::mysecengtest"
+        },
+        {
+            "Effect": "Deny",
+            "Principal": {
+                "AWS": "arn:aws:iam::xxxxxxxxxxxx:role/S3ReadOnly"
+            },
+            "Action": [
+                "s3:Put*",
+                "s3:Delete*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::mysecengtest",
+                "arn:aws:s3:::mysecengtest/*"
+            ]
+        }
+    ]
+}
