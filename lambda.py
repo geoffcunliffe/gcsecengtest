@@ -5,11 +5,11 @@ import json
 # Define variables and service names
 ami = 'ami-0d2fb06f3c1484132' # amazon ami
 instance_type = 't2.micro'
-key_name = 'ec2key'
-subnet_id = 'subnet-bd01cddb'
-security_group = 'sg-b64ec3fd'
-kms_key_id = '4cf6c9c6-d305-4330-874b-eb5b3aa0608c'
-bucket_name = 'gcsecengtest'
+key_name = 'myec2key'
+subnet_id = 'subnet-xxxxxxxx'
+security_group = 'sg-xxxxxxxx'
+kms_key_id = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+bucket_name = 'mysecengtest'
 
 # Get current region
 session = boto3.session.Session()
@@ -93,4 +93,3 @@ def lambda_handler(event, context):
     instance_write_id = instance_write['Instances'][0]['InstanceId']
 
     return ('ReadOnly: ' + instance_read_id + ' Write: ' + instance_write_id)
-
